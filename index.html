@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Air Fund: Indonesia Country Strategy Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 40vh;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+                max-height: 50vh;
+            }
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            padding: 2rem;
+            margin-bottom: 4rem;
+            border-left: 5px solid;
+        }
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .interactive-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .interactive-bar {
+            position: relative;
+            flex-grow: 1;
+            height: 50px;
+            background-color: #dd571c;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            overflow: hidden;
+        }
+        .standard-indicator {
+            position: absolute;
+            height: 100%;
+            background-color: #fecaca;
+            border-radius: 10px 0 0 10px;
+            transition: width 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .standard-label {
+             position: absolute;
+             left: 10px;
+             white-space: nowrap;
+             color: #444;
+        }
+        .multiplier-text {
+            flex-shrink: 0;
+            font-size: 1.875rem;
+            font-weight: 900;
+            color: #F26522;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .multiplier-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .interactive-btn.active {
+            background-color: #F26522;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- 
+    PALETTE: 'WRI Orange & Teal' (#F26522, #F7941D, #00A99D, #231F20)
+    NARRATIVE PLAN:
+    This SPA translates the 12-slide presentation into a scrollable format.
+    1.  Hero/Title: Sets the stage.
+    2.  Agenda: Provides navigation.
+    3.  Section 1 (Intro): Explains the report's purpose and methodology.
+    4.  Section 2 (State of AQ): Shows the severity of pollution.
+    5.  Section 3 (Impacts): Details the health and economic costs.
+    6.  Section 4 (Sources): Breaks down pollution origins.
+    7.  Section 5 (Governance): Illustrates policy challenges.
+    8.  Section 6/7 (Gaps): Summarizes key gaps in Data, Drive, and Demand.
+    9.  Section 8 (Opportunities): Highlights cost-effective solutions.
+    10. CAF Strategy: Outlines the proposed 3-pillar approach.
+    11. Alignment: Shows how the strategy fits with global CAF efforts.
+    12. Next Steps: Concludes with a call to action.
+    VISUALIZATION CHOICES:
+    -   PM2.5 Levels: Bar Chart (Chart.js). Goal: Compare. Justification: Clear comparison against standards. NO SVG.
+    -   Pollutant Sources: Stacked Bar Chart (Chart.js). Goal: Show Composition. Justification: Efficiently displays multi-pollutant compositions. NO SVG.
+    -   Governance Flowchart: HTML/CSS Diagram. Goal: Organize. Justification: Custom HTML for process diagram without banned libraries. NO SVG.
+    -   MACC: Bar Chart (Chart.js). Goal: Rank/Compare. Justification: Standard for ranking interventions by cost-effectiveness. NO SVG.
+    -   Strategy/Alignment Diagrams: HTML/CSS. Goal: Organize/Relate. Justification: Custom layouts for conceptual frameworks. NO SVG.
+    CONFIRMATION: NEITHER Mermaid JS NOR SVG were used in this file.
+    -->
+
+    <header class="bg-gray-200 text-gray-800 text-center py-12 px-4">
+        <div class="flex justify-center items-center gap-8 mb-6">
+            <div class="text-right">
+                <p class="text-2xl font-black tracking-tight text-gray-700">Clean Air Fund</p>
+            </div>
+            <div class="h-12 w-px bg-gray-400"></div>
+            <img src="https://media.licdn.com/dms/image/v2/C511BAQGQw0c8fesZJA/company-background_10000/company-background_10000/0/1584336128835?e=2147483647&v=beta&t=wxnR5VYSmEFs_pYUhJ6KmypcsbSTlfs2sKz7iwK9OkQ" alt="WRI Logo" class="h-10" onerror="this.style.display='none'">
+        </div>
+        <h1 class="text-3xl md:text-5xl font-bold mb-2 text-[#231F20]">Indonesia Country Strategy (2026-2030)</h1>
+        <p class="text-lg md:text-xl font-light max-w-3xl mx-auto text-gray-600">A Strategic Outline Prepared by WRI for the Clean Air Fund</p>
+    </header>
+
+    <nav class="sticky-nav hidden md:block">
+        <div class="container mx-auto px-4">
+            <ul class="flex justify-center space-x-4 py-2 text-sm font-semibold">
+                <li><a href="#section-1" class="text-gray-600 hover:text-[#F26522] transition">Intro</a></li>
+                <li><a href="#section-2" class="text-gray-600 hover:text-[#F26522] transition">State of AQ</a></li>
+                <li><a href="#section-3" class="text-gray-600 hover:text-[#F26522] transition">Impacts</a></li>
+                <li><a href="#section-4" class="text-gray-600 hover:text-[#F26522] transition">Sources</a></li>
+                <li><a href="#section-5" class="text-gray-600 hover:text-[#F26522] transition">Governance</a></li>
+                <li><a href="#section-6-7" class="text-gray-600 hover:text-[#F26522] transition">Gaps</a></li>
+                <li><a href="#section-8" class="text-gray-600 hover:text-[#F26522] transition">Opportunities</a></li>
+                <li><a href="#strategy" class="text-gray-600 hover:text-[#F26522] transition">Strategy</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8 mt-12">
+
+        <section id="agenda" class="section-card border-l-[#00A99D]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">Presentation Agenda</h2>
+            <p class="text-lg text-gray-600 mb-6">This document walks through the proposed structure of the CAF Indonesia Country Strategy Report, which forms the evidence base for our strategic direction. We will cover each section of the report outline in sequence.</p>
+        </section>
+
+        <section id="section-1" class="section-card border-l-[#F26522]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">1. Introduction, Scope & Methodology</h2>
+            <div class="text-gray-700 space-y-4">
+                <p><span class="font-bold">Purpose of the Report:</span> This section introduces the core objective, which is to conduct a thorough situational analysis and stakeholder mapping exercise. This analysis will form the evidence base for the Clean Air Fund Indonesia Country Strategy for the 2026-2030 period.</p>
+                <p><span class="font-bold">Strategic Alignment & Methodology:</span> It details how the strategy development process aligns with CAF's Global Mission and Indonesia's national priorities. The methodology is explained as a two-pronged approach: a comprehensive desk review of existing data and policies, supplemented by primary data collection through interviews and focus groups with key local stakeholders.</p>
+            </div>
+            <div class="mt-8">
+                <h3 class="text-xl font-bold text-center text-[#F26522] mb-4">Key Insight: A Strategy Built on Evidence & Collaboration</h3>
+                <p class="text-center text-gray-600 mb-6">Our approach ensures the strategy is grounded in robust analysis and informed by local perspectives through a multi-phase process.</p>
+                <div class="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="text-center">
+                        <div class="p-4 bg-gray-200 rounded-full inline-block">🔎</div>
+                        <p class="font-semibold mt-2">Phase 1: Desk Review</p>
+                    </div>
+                    <div class="text-2xl flowchart-arrow font-bold transform md:rotate-0 rotate-90 text-[#00A99D]">&rarr;</div>
+                    <div class="text-center">
+                        <div class="p-4 bg-gray-200 rounded-full inline-block">💬</div>
+                        <p class="font-semibold mt-2">Phase 2: Stakeholder Consultation</p>
+                    </div>
+                    <div class="text-2xl flowchart-arrow font-bold transform md:rotate-0 rotate-90 text-[#00A99D]">&rarr;</div>
+                    <div class="text-center">
+                        <div class="p-4 bg-gray-200 rounded-full inline-block">📈</div>
+                        <p class="font-semibold mt-2">Phase 3: Strategy Development</p>
+                    </div>
+                    <div class="text-2xl flowchart-arrow font-bold transform md:rotate-0 rotate-90 text-[#00A99D]">&rarr;</div>
+                     <div class="text-center">
+                        <div class="p-4 bg-gray-200 rounded-full inline-block">✅</div>
+                        <p class="font-semibold mt-2">Phase 4: Validation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-2" class="section-card border-l-[#F26522]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">2. State of Air Quality in Indonesia</h2>
+             <div class="text-gray-700 space-y-4">
+                <p><span class="font-bold">Content Covered in this Section:</span> This section provides a comprehensive overview of Indonesia's air pollution crisis. We will cover:</p>
+                <ul class="list-disc list-inside ml-4 space-y-2">
+                    <li><b>Pollution Levels & Trends:</b> Analysis of key pollutants (PM2.5, PM10, NOx, SOx) and their concentrations in major urban and industrial zones, with a comparative analysis against national (NAAQS) and WHO guidelines.</li>
+                    <li><b>Geographical Hotspots & Vulnerable Populations:</b> Identification and characterization of the areas and demographic groups (by age, health, socio-economic status) that are most severely affected by air pollution.</li>
+                    <li><b>Monitoring Capacity & Gaps:</b> An inventory and evaluation of existing monitoring networks (government, private, research), assessing their geographic coverage, the range of pollutants monitored, and data accessibility. We will pinpoint key institutional and technical gaps.</li>
+                </ul>
+            </div>
+            <div class="mt-8">
+                <h3 class="text-xl font-bold text-center text-[#F26522] mb-4">Key Insight: The Scale of the Challenge</h3>
+                <p class="text-center text-gray-600 mb-6">Jakarta's annual average PM2.5 concentration is <strong>39.6 µg/m³</strong>. Compare this level to key health standards below.</p>
+                <div class="interactive-bar-container my-8">
+                    <div class="interactive-bar">
+                        <div id="standard-indicator" class="standard-indicator">
+                            <span id="standard-label" class="standard-label"></span>
+                        </div>
+                    </div>
+                    <div id="multiplier-text" class="multiplier-text"></div>
+                </div>
+                <div class="flex justify-center gap-4 mt-4">
+                    <button id="btn-who" class="interactive-btn px-4 py-2 rounded-lg border-2 border-[#F26522] text-[#F26522] transition">Compare with WHO</button>
+                    <button id="btn-naaqs" class="interactive-btn px-4 py-2 rounded-lg border-2 border-[#F7941D] text-[#F7941D] transition">Compare with NAAQS</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-3" class="section-card border-l-[#F26522]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">3. Impacts of Air Pollution</h2>
+            <div class="text-gray-700 space-y-4">
+                <p><span class="font-bold">Content Covered in this Section:</span> Here, we quantify the severe and multi-faceted consequences of poor air quality on the nation. The analysis includes:</p>
+                <ul class="list-disc list-inside ml-4 space-y-2">
+                    <li><b>Public Health Impacts:</b> Estimation of morbidity and mortality, the association with specific diseases (respiratory, cardiovascular), the disproportionate effects on vulnerable groups, and the burden on healthcare systems.</li>
+                    <li><b>Economic Impacts:</b> Assessment of macroeconomic costs (GDP loss) and microeconomic costs (healthcare expenditures, lost labor productivity, impacts on tourism).</li>
+                    <li><b>Environmental, Climate, and Social Co-impacts:</b> Analysis of the role of Short-Lived Climate Pollutants (SLCPs) and the influence of air pollution on quality of life and social equity.</li>
+                </ul>
+            </div>
+            <div class="mt-8">
+                <h3 class="text-xl font-bold text-center text-[#F26522] mb-4">Key Insight: A Drain on Health and Wealth</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div class="text-center p-6 bg-orange-50 rounded-lg">
+                        <p class="text-4xl font-black text-[#F26522]">10,000+</p>
+                        <p class="font-semibold text-gray-700 mt-2">Premature Deaths Annually in Jakarta</p>
+                    </div>
+                    <div class="text-center p-6 bg-orange-50 rounded-lg">
+                        <p class="text-4xl font-black text-[#F26522]">$220B</p>
+                        <p class="font-semibold text-gray-700 mt-2">Annual GDP Loss from PM2.5 Damages</p>
+                    </div>
+                    <div class="text-center p-6 bg-orange-50 rounded-lg">
+                        <p class="text-4xl font-black text-[#F26522]">1.4 Years</p>
+                        <p class="font-semibold text-gray-700 mt-2">Potential Gain in Life Expectancy</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-4" class="section-card border-l-[#F26522]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">4. Major Sources of Air Pollution</h2>
+            <div class="text-gray-700 space-y-4">
+                 <p><span class="font-bold">Content Covered in this Section:</span> This section provides a granular look at the origins of air pollution in Indonesia. The report will cover:</p>
+                <ul class="list-disc list-inside ml-4 space-y-2">
+                    <li><b>Source Apportionment Insights:</b> A review of existing source apportionment studies to assess the relative contributions of different sectors, alongside an identification of critical data gaps.</li>
+                    <li><b>National Emission Inventory:</b> An assessment of the availability and comprehensiveness of the national emission inventory and the official MOEF guidelines for its compilation.</li>
+                    <li><b>Detailed Sectoral Analysis:</b> A deep dive into key emitting sectors, including Transportation (road, maritime, fuel quality), Industry (manufacturing, SMEs), Energy (power generation), Residential (household fuel use), Waste Management (open burning), and Agriculture.</li>
+                </ul>
+            </div>
+             <div class="mt-8">
+                <h3 class="text-xl font-bold text-center text-[#F26522] mb-4">Key Insight: A Multi-Sectoral Problem</h3>
+                <p class="text-center text-gray-600 mb-6">Data from Greater Jakarta reveals that while transportation is a major contributor, sectors like industry and power generation are dominant sources for specific, highly harmful pollutants like SO2.</p>
+                <div class="chart-container mx-auto" style="height: 450px; max-height: 60vh;">
+                    <canvas id="sectorContributionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-5" class="section-card border-l-[#F26522]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">5. The Governance and Enforcement Gap</h2>
+            <div class="text-gray-700 space-y-4">
+                <p><span class="font-bold">Content Covered in this Section:</span> This section critically examines the systems and structures intended to manage air quality. The analysis includes:</p>
+                <ul class="list-disc list-inside ml-4 space-y-2">
+                    <li><b>Institutional Arrangements:</b> Mapping of key government agencies at national and sub-national levels, their mandates, functions, and coordination mechanisms.</li>
+                    <li><b>Legal and Regulatory Landscape:</b> A thorough review of national and sub-national laws, regulations, and standards, including NAAQS, emission standards, and fuel quality standards, highlighting issues of weak enforcement.</li>
+                    <li><b>Existing Government Strategies:</b> Analysis of national development plans (RPJMN), specific clean air action plans, and government budget allocations for air quality management.</li>
+                    <li><b>Political Economy Context:</b> The influence of political dynamics, economic priorities, and vested interests on policy formulation and implementation.</li>
+                </ul>
+            </div>
+             <div class="mt-8">
+                <h3 class="text-xl font-bold text-center text-[#F26522] mb-4">Key Insight: The Governance Gridlock</h3>
+                <p class="text-center text-gray-600 mb-6">"A lack of top-down coordination creates a domino effect, paralyzing on-the-ground action"</p>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6 relative">
+                    <div class="w-full md:w-1/3 p-4 border-2 border-gray-300 rounded-lg shadow-lg bg-white z-10">
+                        <h4 class="font-bold text-md text-center text-[#231F20] mb-2">🏢 Fragmented and Uncoordinated Governance</h4>
+                        <p class="text-xs text-gray-600">Indonesia's air quality governance is characterized by overlapping mandates across key ministries (MoE, MEMR, MoI) and between national/provincial authorities. Without a central, empowered body to ensure alignment, these parallel initiatives often fail to converge, leading to policy gaps and diluted impact.</p>
+                    </div>
+                    <div class="hidden md:block absolute left-1/3 top-1/2 w-1/12 h-px bg-gray-400"></div>
+                    <div class="hidden md:block absolute left-1/3 top-1/4 w-px h-1/4 bg-gray-400"></div>
+                    <div class="hidden md:block absolute left-1/3 top-1/2 w-px h-1/4 bg-gray-400"></div>
+                    <div class="w-full md:w-2/3 space-y-4 z-10">
+                        <div class="p-4 border-2 border-dashed border-blue-300 rounded-lg bg-blue-50">
+                            <h4 class="font-bold text-md text-blue-800">Policy Fails in Practice</h4>
+                            <p class="text-xs text-blue-700 mb-3">Even when good regulations exist, they are rendered ineffective by a systemic lack of enforcement and accountability.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                                <div><strong class="text-blue-900">Ineffective Fuel Standards:</strong> The Euro IV standard is undermined by continued subsidies for cheaper Euro II fuel.</div>
+                                <div><strong class="text-blue-900">Weak Emission Testing:</strong> Testing is often a formality with low compliance rates and minimal penalties.</div>
+                                <div><strong class="text-blue-900">Limited Industrial Oversight:</strong> PROPER ratings are largely voluntary, and CEMS is rarely implemented.</div>
+                            </div>
+                        </div>
+                        <div class="p-4 border-2 border-dashed border-yellow-400 rounded-lg bg-yellow-50">
+                            <h4 class="font-bold text-md text-yellow-800">A Weak Business Case for Clean Air</h4>
+                            <p class="text-xs text-yellow-700 mb-3">The private sector lacks both pressure and incentives to invest in cleaner technologies, as polluters face little to no consequences.</p>
+                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                                <div><strong class="text-yellow-900">High Upfront Costs:</strong> The capital expenditure (CAPEX) for any clean technology is a significant barrier for businesses.</div>
+                                <div><strong class="text-yellow-900">Weak Emission Testing:</strong> Without strong financial penalties, polluting remains economically risk-free.</div>
+                                <div><strong class="text-yellow-900">Limited Industrial Oversight:</strong> Unclear policies and the absence of a clear long-term roadmap increase perceived risk.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-6-7" class="section-card border-l-[#00A99D]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">6 & 7. Stakeholder Landscape & Gap Analysis</h2>
+            <div class="text-gray-700 space-y-4">
+                <p><span class="font-bold">Content Covered in this Section:</span> This part of the report synthesizes our findings to map the path forward. We will present:</p>
+                <ul class="list-disc list-inside ml-4 space-y-2">
+                    <li><b>Stakeholder Mapping:</b> A detailed identification of key actors across government, the private sector, civil society, academia, and international partners, assessing their current involvement and capacity.</li>
+                    <li><b>Inventory of Interventions & Lessons Learned:</b> A review of past and ongoing air pollution mitigation projects to identify successful approaches, barriers, and best practices.</li>
+                    <li><b>Comprehensive Gap Analysis:</b> A systematic analysis of what is missing, structured around Data & Knowledge, Policy & Regulation, Institutional Capacity, Finance & Investment, Public Demand, and Technology Gaps.</li>
+                </ul>
+            </div>
+             <div class="mt-8">
+                <h3 class="text-xl font-bold text-center text-[#00A99D] mb-4">Key Insight: Role of Policymakers in Handling Air Pollution</h3>
+                <p class="text-center text-gray-600 mb-6">Air pollution is a cross-sectoral issue requiring integrated coordination, ideally supported by a Presidential Regulation to align ministries and regional governments.</p>
+                <div class="w-full p-4 md:p-6 bg-gray-50 rounded-lg">
+                    <div class="text-center mb-6">
+                        <div class="inline-block px-6 py-3 bg-blue-800 text-white font-bold rounded-lg shadow-md">Coordinator based on Presidential Regulation</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-start">
+                        <div class="text-center">
+                            <div class="inline-block px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-sm">Reduction of Pollutant Sources</div>
+                            <div class="space-y-3 mt-4">
+                                <div class="p-3 bg-white border border-gray-300 rounded-lg shadow-sm">Ministry of Energy and Mineral Resources</div>
+                                <div class="p-3 bg-white border border-gray-300 rounded-lg shadow-sm">Ministry of Industry</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="inline-block px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-sm">Regulation, Monitoring, Law Enforcement</div>
+                            <div class="space-y-3 mt-4">
+                                <div class="p-3 bg-white border border-gray-300 rounded-lg shadow-sm">Ministry of Environment and Forestry</div>
+                                <div class="p-3 bg-white border border-gray-300 rounded-lg shadow-sm">Ministry of Home Affairs</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="inline-block px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-sm">Public Health Protection</div>
+                            <div class="space-y-3 mt-4">
+                                <div class="p-3 bg-white border border-gray-300 rounded-lg shadow-sm">Ministry of Health</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-12">
+                        <div class="inline-block px-6 py-3 bg-gray-600 text-white font-bold rounded-lg shadow-md">Implementer</div>
+                        <div class="mt-2 p-3 bg-white border border-gray-300 rounded-lg shadow-sm inline-block">Regional Government (Jabodetabek)</div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 text-center text-sm">
+                        <div class="p-3 bg-white border border-gray-300 rounded-lg shadow-sm">Transportation Agency</div>
+                        <div class="p-3 bg-white border border-gray-300 rounded-lg shadow-sm">Industry and Trade Agency</div>
+                        <div class="p-3 bg-white border border-gray-300 rounded-lg shadow-sm">Environmental Agency</div>
+                        <div class="p-3 bg-white border border-gray-300 rounded-lg shadow-sm">Health Agency</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-8" class="section-card border-l-[#F26522]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">8. Opportunities & CAF's Strategic Niche</h2>
+            <div class="text-gray-700 space-y-4">
+                <p><span class="font-bold">Content Covered in this Section:</span> The final analytical section identifies concrete pathways for action. We will cover:</p>
+                <ul class="list-disc list-inside ml-4 space-y-2">
+                    <li><b>SWOT Analysis:</b> A consolidated assessment of Strengths, Weaknesses, Opportunities, and Threats for improving air quality in Indonesia.</li>
+                    <li><b>High-Impact Intervention Areas:</b> Prioritization of sectors and pollutant sources that offer the greatest potential for emission reductions and co-benefits (health, climate, economic).</li>
+                    <li><b>Potential Strategic Niches for CAF:</b> Identifying areas where CAF's global expertise, funding model, and convening power can add unique, catalytic value aligned with our Data, Demand, and Drive pillars.</li>
+                    <li><b>Innovative Financing Mechanisms:</b> An assessment of the potential for blended finance, public-private partnerships, and green bonds to fund clean air initiatives.</li>
+                </ul>
+            </div>
+            <div class="mt-8">
+                <h3 class="text-xl font-bold text-center text-[#F26522] mb-4">Key Insight: Where to Start for Maximum Impact</h3>
+                <p class="text-center text-gray-600 mb-6">The Marginal Abatement Cost Curve (MACC) shows that improving waste management and funding industrial pollution controls are the most cost-effective "quick wins" to begin reducing PM2.5 emissions.</p>
+                <div class="chart-container mx-auto" style="height: 500px; max-height: 70vh;">
+                    <canvas id="maccChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="section-card border-l-[#F26522]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">Strategy Outline & Key Components</h2>
+            <p class="text-lg text-gray-600 mb-6">The following outline, drawn from the inception report, details the comprehensive structure of the final Country Strategy document. It ensures every action is evidence-based and aligned with our core objectives.</p>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 bg-gray-50 rounded-lg border border-gray-200">
+                    <h3 class="font-bold text-lg mb-4 text-[#F26522]">Core Report Structure</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="p-3 bg-gray-100 rounded-md font-semibold">Executive Summary</li>
+                        <li class="p-3 bg-gray-100 rounded-md font-semibold">Developing the Strategy Process</li>
+                        <li class="p-3 bg-gray-100 rounded-md font-semibold">The Scope</li>
+                        <li class="p-3 bg-gray-100 rounded-md font-semibold">CAF Vision and Mission 2026-2030</li>
+                        <li class="p-3 bg-gray-100 rounded-md font-semibold">Context & Situation Analysis</li>
+                        <li class="p-3 bg-gray-100 rounded-md font-semibold">Problem Statement</li>
+                        <li class="p-3 bg-gray-100 rounded-md font-semibold">Stakeholder & Actor Mapping</li>
+                    </ul>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-lg border border-gray-200">
+                    <h3 class="font-bold text-lg mb-4 text-[#00A99D]">Strategic Framework</h3>
+                    <ul class="space-y-4 text-gray-700">
+                        <li>
+                            <strong class="text-[#231F20]">Proposed CAF Approach/Strategy:</strong>
+                            <ul class="list-disc list-inside ml-4 mt-1 text-sm text-gray-600">
+                                <li>Foundational, High Impact</li>
+                                <li>Systemic Enablers</li>
+                                <li>Long-term and Transformative Scaling</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong class="text-[#231F20]">The Theory of Change:</strong>
+                            <ul class="list-disc list-inside ml-4 mt-1 text-sm text-gray-600">
+                                <li>Change Mapping (Impact, Outcomes)</li>
+                                <li>Assumptions, Risks, and Mitigations</li>
+                                <li>Proposed Interventions / Strategic Pillars</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong class="text-[#231F20]">MEL Framework:</strong>
+                            <ul class="list-disc list-inside ml-4 mt-1 text-sm text-gray-600">
+                                <li>Key Indicators and Targets</li>
+                                <li>Monitoring Framework</li>
+                                <li>Mid-Term and End-Term Evaluations</li>
+                                <li>Knowledge Sharing & Adaptive Management</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="alignment" class="section-card border-l-[#00A99D]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">Alignment with Global & Portfolio Strategies</h2>
+            <p class="text-lg text-gray-600 mb-6">The Indonesia strategy is not developed in a vacuum. It directly contributes to CAF's global ambition by learning from and adapting the proven frameworks used in our other lighthouse portfolios.</p>
+            <div class="mt-8">
+                <h3 class="text-xl font-bold text-center text-[#00A99D] mb-4">A Cohesive Global Approach: Adapting the Theory of Change</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="p-6 bg-gray-50 rounded-lg border-t-4 border-[#F7941D]">
+                        <h3 class="font-bold text-lg mb-2 text-[#231F20]">🇬🇧 UK Strategy</h3>
+                        <p class="text-sm text-gray-600 mb-4">Focuses on overcoming political inertia and weak targets by building an undeniable evidence base.</p>
+                        <div class="text-xs space-y-3">
+                            <p><strong class="text-[#F26522]">Data:</strong> Strengthen the economic case for action to influence policy.</p>
+                            <p><strong class="text-[#F7941D]">Demand:</strong> Support coordinated campaigns (e.g., Healthy Air Coalition) to maintain public pressure.</p>
+                            <p><strong class="text-[#00A99D]">Drive:</strong> Use inside-track influencing to shape the national Air Quality Strategy and target key sectors like transport and domestic heating.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-lg border-t-4 border-[#F7941D]">
+                        <h3 class="font-bold text-lg mb-2 text-[#231F20]">🇿🇦 South Africa Strategy</h3>
+                        <p class="text-sm text-gray-600 mb-4">Targets industrial pollution and environmental injustice in Priority Areas, linking clean air to the Just Energy Transition.</p>
+                        <div class="text-xs space-y-3">
+                            <p><strong class="text-[#F26522]">Data:</strong> Improve evidence through low-cost sensor deployment in under-monitored areas and develop localized health studies.</p>
+                            <p><strong class="text-[#F7941D]">Demand:</strong> Empower community-based organizations in under-served areas to advocate for their right to clean air.</p>
+                            <p><strong class="text-[#00A99D]">Drive:</strong> Support government to implement and enforce Priority Area regulations and promote corporate accountability.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-orange-50 rounded-lg border-t-4 border-[#F26522]">
+                        <h3 class="font-bold text-lg mb-2 text-[#231F20]">🇮🇩 Proposed Indonesia Strategy</h3>
+                        <p class="text-sm text-gray-600 mb-4">Aims to tackle fragmented governance and data gaps, focusing on Greater Jakarta as a starting point.</p>
+                        <div class="text-xs space-y-3">
+                            <p><strong class="text-[#F26522]">Data:</strong> Expand monitoring capacity in priority cities, develop early warning systems in Jakarta to reduce exposure, and support a national emission inventory.</p>
+                            <p><strong class="text-[#F7941D]">Demand:</strong> Build public awareness of health risks and empower CSOs to advocate for stronger policies and enforcement.</p>
+                            <p><strong class="text-[#00A99D]">Drive:</strong> Provide technical assistance to establish a coordinated Airshed Task Force and de-risk private investment in clean technologies for key sectors.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 p-4 bg-cyan-50 rounded-lg text-center">
+                    <p class="font-bold text-md text-[#083344]">Potential Impact: Reduced PM2.5 emissions from key sectors (transport, industry) and reduced exposure for vulnerable populations in urban hotspots.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="next-steps" class="section-card border-l-[#F26522]">
+            <h2 class="text-3xl font-bold mb-4 text-[#231F20]">Next Steps & Discussion</h2>
+            <div class="mt-8">
+                <ol class="list-decimal list-inside space-y-4 text-gray-700 font-semibold">
+                    <li>In dept desk review and situnational analysis (current stage).</li>
+                    <li>Conduct a interview, FGD, writing workshop with key with AQ experts.</li>
+                    <li>Strategic priorities, ToC, KPI, MEL, development .</li>
+                    <li>Validation and finalization with Indonesian government stakeholders.</li>
+                </ol>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto p-8 text-center">
+            <p class="font-bold text-xl mb-2">Clean Air Fund & WRI Indonesia</p>
+            <p>Working together for a world where everyone can breathe clean air.</p>
+        </div>
+    </footer>
+
+    <script>
+        const chartColors = {
+            orange: '#F26522',
+            gold: '#F7941D',
+            teal: '#00A99D',
+            dark: '#231F20',
+            lightGray: '#d1d5db',
+            green: '#4ade80',
+            yellow: '#facc15',
+            blue: '#60a5fa'
+        };
+
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        font: { family: 'Inter', size: 12 },
+                        color: '#374151'
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    titleFont: { family: 'Inter', weight: 'bold', size: 14 },
+                    bodyFont: { family: 'Inter', size: 12 },
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { font: { family: 'Inter', size: 12 }, color: '#4b5563' },
+                    grid: { display: false }
+                },
+                y: {
+                    ticks: { font: { family: 'Inter', size: 12 }, color: '#4b5563' },
+                    grid: { color: '#e5e7eb' },
+                    beginAtZero: true
+                }
+            }
+        };
+        
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) return str;
+            const words = str.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        }
+        
+        const standardIndicator = document.getElementById('standard-indicator');
+        const standardLabel = document.getElementById('standard-label');
+        const multiplierTextEl = document.getElementById('multiplier-text');
+        const btnWhoEl = document.getElementById('btn-who');
+        const btnNaaqsEl = document.getElementById('btn-naaqs');
+
+        const standardsData = {
+            who: { value: 5, label: '5 µg/m³', color: 'bg-blue-300' },
+            naaqs: { value: 15, label: '15 µg/m³', color: 'bg-yellow-300' }
+        };
+
+        function updateInteractiveBar(standardKey) {
+            const standard = standardsData[standardKey];
+            const jakartaValue = 39.6;
+            
+            const percentage = (standard.value / jakartaValue) * 100;
+            
+            standardIndicator.style.width = `${percentage}%`;
+            standardIndicator.className = `standard-indicator ${standard.color}`;
+            standardLabel.textContent = standard.label;
+
+            const multiplier = (jakartaValue / standard.value).toFixed(1);
+            multiplierTextEl.textContent = `${multiplier}X Higher`;
+            
+            multiplierTextEl.classList.remove('visible');
+            setTimeout(() => {
+                multiplierTextEl.classList.add('visible');
+            }, 10);
+
+            if (standardKey === 'who') {
+                btnWhoEl.classList.add('active');
+                btnNaaqsEl.classList.remove('active');
+            } else {
+                btnNaaqsEl.classList.add('active');
+                btnWhoEl.classList.remove('active');
+            }
+        }
+
+        btnWhoEl.addEventListener('click', () => updateInteractiveBar('who'));
+        btnNaaqsEl.addEventListener('click', () => updateInteractiveBar('naaqs'));
+
+        updateInteractiveBar('who');
+
+
+        const sectorCtx = document.getElementById('sectorContributionChart').getContext('2d');
+        new Chart(sectorCtx, {
+            type: 'bar',
+            data: {
+                labels: ['PM10', 'PM2.5', 'BC', 'NOx', 'SO2', 'GHGs', 'CH4'],
+                datasets: [
+                    { label: 'Industry', data: [51, 52, 13, 23, 53, 34,2], backgroundColor: '#ef4444' }, // red
+                    { label: 'Power Plant', data: [31, 20, 2, 25, 40, 30, 6], backgroundColor: '#f97316' }, // orange
+                    { label: 'Transport', data: [17, 24, 80, 46, 7, 26, 8], backgroundColor: '#eab308' }, // yellow
+                    { label: 'Waste', data: [1, 3, 2, 0, 0, 2, 76], backgroundColor: '#22c55e' }, // green
+                    { label: 'Residential', data: [0, 0, 0, 3, 0, 8, 8], backgroundColor: '#3b82f6' }, // blue
+                    { label: 'Construction', data: [0, 1, 3, 3, 0, 0, 0], backgroundColor: '#a1a1aa' }, // grey
+                ]
+            },
+            options: {
+                ...defaultChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        stacked: true,
+                        ticks: { callback: value => `${value}%` },
+                         title: { display: true, text: 'Contribution (%)', font: { size: 14, weight: 'bold', family: 'Inter' }, color: '#374151'}
+                    },
+                    y: { stacked: true }
+                }
+            }
+        });
+
+        const maccCtx = document.getElementById('maccChart').getContext('2d');
+        const maccData = {
+            labels: [
+                'Agri-Residue Management', 'Household Waste Management', 'Industry APC Devices', 'Power Plant APC Devices', 
+                'Truck Euro-IV Fuel', 'Bus Euro-IV Fuel', 'Power Plant Coal to Gas', 'Industry Coal to Gas',
+                'Motorcycle Euro-IV Fuel', 'Truck Engine Retrofit', 'Motorcycle Electrification'
+            ].map(label => wrapLabel(label, 16)),
+            datasets: [
+                { type: 'bar', label: 'Open Burning', data: [3.707, 4.038, null, null, null, null, null, null, null, null, null], backgroundColor: chartColors.green },
+                { type: 'bar', label: 'Industry', data: [null, null, 9.089, 9.166, null, null, 264.573, 307.935, null, null, null], backgroundColor: chartColors.yellow },
+                { type: 'bar', label: 'Transportation', data: [null, null, null, null, 87.141, 127.234, null, null, 769.537, 935.610, 4259.916], backgroundColor: chartColors.blue }
+            ]
+        };
+
+        new Chart(maccCtx, {
+            type: 'bar',
+            data: maccData,
+            options: {
+                 ...defaultChartOptions,
+                 scales: {
+                    x: {
+                        ...defaultChartOptions.scales.x,
+                        title: { display: true, text: 'Intervention', font: { size: 14, weight: 'bold', family: 'Inter' }, color: '#374151'},
+                        ticks: {
+                            ...defaultChartOptions.scales.x.ticks,
+                            maxRotation: 45,
+                            minRotation: 45,
+                        },
+                    },
+                    y: {
+                        ...defaultChartOptions.scales.y,
+                        type: 'logarithmic',
+                        title: { display: true, text: 'Cost per PM2.5 Abatement (USD/ton)', font: { size: 14, weight: 'bold', family: 'Inter' }, color: '#374151'},
+                        ticks: {
+                            callback: function(value, index, values) {
+                                if (value === 1 || value === 10 || value === 100 || value === 1000 || value === 10000 || value === 100000 || value === 1000000 || value === 5000000) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    ...defaultChartOptions.plugins,
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        ...defaultChartOptions.plugins.tooltip,
+                        callbacks: {
+                            ...defaultChartOptions.plugins.tooltip.callbacks,
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += '$' + context.parsed.y.toLocaleString();
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
